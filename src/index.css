@@ -1,0 +1,169 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Muted natural tones - calm, human, ephemeral */
+    --background: 30 15% 96%;
+    --foreground: 30 8% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 30 8% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 8% 20%;
+
+    /* Sage as primary */
+    --primary: 140 20% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Sand as secondary */
+    --secondary: 35 25% 82%;
+    --secondary-foreground: 30 8% 20%;
+
+    /* Warm grays */
+    --muted: 30 10% 88%;
+    --muted-foreground: 30 8% 45%;
+
+    /* Blush as accent */
+    --accent: 10 40% 75%;
+    --accent-foreground: 30 8% 20%;
+
+    --destructive: 0 70% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Sage for success */
+    --success: 140 35% 50%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 30 15% 88%;
+    --input: 30 15% 88%;
+    --ring: 140 20% 55%;
+
+    --radius: 1.5rem;
+
+    /* Calm gradients */
+    --gradient-warm: linear-gradient(135deg, hsl(140 20% 55%), hsl(10 40% 75% / 0.8));
+    --gradient-subtle: linear-gradient(180deg, hsl(30 15% 96%), hsl(30 10% 88% / 0.2));
+    --gradient-hero: linear-gradient(135deg, hsl(30 15% 96%), hsl(30 10% 88% / 0.3));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(30 10% 88% / 0.15));
+    
+    /* Gentle shadows */
+    --shadow-soft: 0 2px 12px hsl(30 8% 20% / 0.04);
+    --shadow-medium: 0 4px 20px hsl(30 8% 20% / 0.06);
+    --shadow-strong: 0 8px 32px hsl(30 8% 20% / 0.08);
+    --shadow-glow: 0 0 24px hsl(140 20% 55% / 0.15);
+    --shadow-elegant: 0 8px 32px hsl(30 8% 20% / 0.08);
+  }
+
+  .dark {
+    --background: 30 10% 12%;
+    --foreground: 30 10% 92%;
+
+    --card: 30 10% 15%;
+    --card-foreground: 30 10% 92%;
+
+    --popover: 30 10% 15%;
+    --popover-foreground: 30 10% 92%;
+
+    --primary: 140 25% 50%;
+    --primary-foreground: 30 10% 12%;
+
+    --secondary: 35 20% 25%;
+    --secondary-foreground: 30 10% 92%;
+
+    --muted: 30 10% 22%;
+    --muted-foreground: 30 10% 65%;
+
+    --accent: 10 35% 45%;
+    --accent-foreground: 30 10% 92%;
+
+    --destructive: 0 70% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 140 30% 45%;
+    --success-foreground: 30 10% 12%;
+
+    --border: 30 10% 25%;
+    --input: 30 10% 25%;
+    --ring: 140 25% 50%;
+
+    --gradient-warm: linear-gradient(135deg, hsl(140 25% 50%), hsl(10 35% 45% / 0.8));
+    --gradient-subtle: linear-gradient(180deg, hsl(30 10% 12%), hsl(30 10% 22% / 0.2));
+    --gradient-hero: linear-gradient(135deg, hsl(30 10% 12%), hsl(30 10% 22% / 0.3));
+    --gradient-card: linear-gradient(135deg, hsl(30 10% 15%), hsl(30 10% 22% / 0.15));
+    
+    --shadow-soft: 0 2px 12px hsl(0 0% 0% / 0.3);
+    --shadow-medium: 0 4px 20px hsl(0 0% 0% / 0.4);
+    --shadow-strong: 0 8px 32px hsl(0 0% 0% / 0.5);
+    --shadow-glow: 0 0 24px hsl(140 25% 50% / 0.2);
+    --shadow-elegant: 0 8 32px hsl(0 0% 0% / 0.5);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  @supports (font-variation-settings: normal) {
+    body {
+      font-family: "Inter var", sans-serif;
+    }
+  }
+}
+
+@layer utilities {
+  .gradient-warm {
+    background: var(--gradient-warm);
+  }
+  
+  .gradient-subtle {
+    background: var(--gradient-subtle);
+  }
+  
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .gradient-card {
+    background: var(--gradient-card);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-medium {
+    box-shadow: var(--shadow-medium);
+  }
+
+  .shadow-strong {
+    box-shadow: var(--shadow-strong);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .shadow-elegant {
+    box-shadow: var(--shadow-elegant);
+  }
+
+  .text-gradient-warm {
+    background: var(--gradient-warm);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}

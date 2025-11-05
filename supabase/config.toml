@@ -1,0 +1,13 @@
+project_id = "ptyagqwcbqxhfjzgijtq"
+
+[functions.record-location]
+verify_jwt = true
+
+[functions.calculate-compatibility]
+verify_jwt = true
+
+[functions.sessionize-locations]
+verify_jwt = true
+
+[functions.run-backfill]
+verify_jwt = false

@@ -1,0 +1,8 @@
+-- Add meeting details columns to matches table
+ALTER TABLE matches 
+ADD COLUMN IF NOT EXISTS venue_name TEXT,
+ADD COLUMN IF NOT EXISTS landmark TEXT,
+ADD COLUMN IF NOT EXISTS meet_code TEXT,
+ADD COLUMN IF NOT EXISTS shared_emoji_code TEXT,
+ADD COLUMN IF NOT EXISTS venue_lat DOUBLE PRECISION,
+ADD COLUMN IF NOT EXISTS venue_lng DOUBLE PRECISION;
