@@ -78,6 +78,56 @@ export const useUserTrends = () => {
     };
 
     fetchTrends();
+
+    // Subscribe to real-time updates for activity_patterns and matches
+    if (!user?.id) return;
+
+    const channel = supabase
+      .channel('user-trends-updates')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'activity_patterns',
+          filter: `user_id=eq.${user.id}`
+        },
+        () => {
+          console.log('Activity patterns updated, refreshing trends');
+          fetchTrends();
+        }
+      )
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'matches',
+          filter: `uid_a=eq.${user.id}`
+        },
+        () => {
+          console.log('Matches updated, refreshing trends');
+          fetchTrends();
+        }
+      )
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'matches',
+          filter: `uid_b=eq.${user.id}`
+        },
+        () => {
+          console.log('Matches updated, refreshing trends');
+          fetchTrends();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [user?.id]);
 
   return { trends, loading };

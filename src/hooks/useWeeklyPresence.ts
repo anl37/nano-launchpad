@@ -66,6 +66,30 @@ export const useWeeklyPresence = () => {
     };
 
     fetchWeeklyPresence();
+
+    // Subscribe to real-time updates for location_visits
+    if (!user?.id) return;
+
+    const channel = supabase
+      .channel('weekly-presence-updates')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'location_visits',
+          filter: `user_id=eq.${user.id}`
+        },
+        () => {
+          console.log('New location visit detected, refreshing weekly presence');
+          fetchWeeklyPresence();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [user?.id]);
 
   return { weeklyData, loading };

@@ -83,6 +83,43 @@ export const useActivityStats = () => {
     };
 
     fetchActivityStats();
+
+    // Subscribe to real-time updates for activity_patterns
+    if (!user?.id) return;
+
+    const channel = supabase
+      .channel('activity-stats-updates')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'activity_patterns',
+          filter: `user_id=eq.${user.id}`
+        },
+        () => {
+          console.log('Activity patterns updated, refreshing stats');
+          fetchActivityStats();
+        }
+      )
+      .on(
+        'postgres_changes',
+        {
+          event: 'UPDATE',
+          schema: 'public',
+          table: 'profiles',
+          filter: `id=eq.${user.id}`
+        },
+        () => {
+          console.log('Profile interests updated, refreshing stats');
+          fetchActivityStats();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [user?.id]);
 
   return { activities, loading };
