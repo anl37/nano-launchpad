@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { User, Clock, MapPin, Settings, Shield, Users } from "lucide-react";
 import { TabNavigation } from "@/components/TabNavigation";
-import { HeatmapDay } from "@/components/HeatmapDay";
+// import { HeatmapDay } from "@/components/HeatmapDay"; // Internal metric only
 import { ConnectionRequestsPanel } from "@/components/ConnectionRequestsPanel";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -84,8 +84,8 @@ const Profile = () => {
           <p className="text-sm text-muted-foreground">{user?.email}</p>
         </div>
 
-        {/* Weekly Presence */}
-        <div className="gradient-card rounded-3xl p-6 shadow-soft">
+        {/* Weekly Presence - Internal metric only */}
+        {/* <div className="gradient-card rounded-3xl p-6 shadow-soft">
           <h3 className="font-semibold text-foreground mb-4 flex items-center gap-2">
             <MapPin className="w-4 h-4 text-primary" />
             Weekly Presence
@@ -134,7 +134,7 @@ const Profile = () => {
               </p>
             </>
           )}
-        </div>
+        </div> */}
 
         {/* Top Activities */}
         <div className="gradient-card rounded-3xl p-6 shadow-soft">
